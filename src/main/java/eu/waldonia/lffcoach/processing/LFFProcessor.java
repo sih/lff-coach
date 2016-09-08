@@ -16,6 +16,9 @@ public class LFFProcessor {
     private static final Logger LOGGER = LoggerFactory.getLogger(LFFProcessor.class);
     static final String PDF_LISTING_FILE_LOCATION = "./src/main/resources/lff-2016.pdf";
 
+    public static final String DEFAULT_SCREENINGS_LOCATION = "./data";
+
+
     public List<Screening> process(String fileLocation) {
         List<Screening> screenings = null;
         try {

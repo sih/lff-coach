@@ -47,6 +47,14 @@
             <artifactId>commons-lang3</artifactId>
             <version>3.3</version>
         </dependency>
+
+        <!-- used for matching titles to films -->
+        <dependency>
+            <groupId>org.elasticsearch</groupId>
+            <artifactId>elasticsearch</artifactId>
+            <version>2.3.3</version>
+        </dependency>
+
     </dependencies>
 
     <build>
