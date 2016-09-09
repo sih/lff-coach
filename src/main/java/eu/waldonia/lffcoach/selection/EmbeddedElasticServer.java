@@ -14,6 +14,7 @@ import static org.elasticsearch.node.NodeBuilder.nodeBuilder;
 public class EmbeddedElasticServer {
 
     private static final String DEFAULT_DATA_LOCATION = "./target/data";
+    private static final String HOME_DIR = ".";
 
     private static EmbeddedElasticServer instance;
 
@@ -27,17 +28,18 @@ public class EmbeddedElasticServer {
         return instance;
     }
 
-    EmbeddedElasticServer() {
+    public EmbeddedElasticServer() {
         this(DEFAULT_DATA_LOCATION);
     }
 
-    EmbeddedElasticServer(final String dataDirectory) {
+    public EmbeddedElasticServer(final String dataDirectory) {
 
         Settings.Builder settings =
                 Settings
                         .settingsBuilder()
                         .put("http.enabled",false)
                         .put("path.data", dataDirectory)
+                        .put("path.home", HOME_DIR)
                         ;
 
         node = nodeBuilder()
@@ -46,11 +48,11 @@ public class EmbeddedElasticServer {
                 .node();
     }
 
-    Client getClient() {
+    public Client client() {
         return node.client();
     }
 
-    void shutdown() {
+    public void shutdown() {
         node.close();
     }
 
@@ -60,9 +62,9 @@ public class EmbeddedElasticServer {
      * @param index The index to create
      */
 
-    void createIndex(String index) {
+    public void createIndex(String index) {
         CreateIndexResponse createResponse =
-                getClient()
+                client()
                         .admin()
                         .indices()
                         .create(createIndexRequest(index))
@@ -73,8 +75,8 @@ public class EmbeddedElasticServer {
      * Refresh the index
      * @param index The index to refresh
      */
-    void refreshIndex(String index) {
-        getClient()
+    public void refreshIndex(String index) {
+        client()
                 .admin()
                 .indices()
                 .prepareRefresh(index)
@@ -85,11 +87,13 @@ public class EmbeddedElasticServer {
      * Delete an index
      * @param index The index to delete
      */
-    void deleteIndex(String index) {
-        getClient()
+    public void deleteIndex(String index) {
+        client()
                 .admin()
                 .indices()
                 .prepareDelete(index)
                 .get();
     }
+
+
 }

@@ -26,11 +26,17 @@ public class LFFProcessor {
             PDFExtractor extractor = new PDFExtractor();
             CinemaNormalizer cinemaNormalizer = new CinemaNormalizer();
             DateNormalizer dateNormalizer = new DateNormalizer();
+            FilmIndexer indexer = new FilmIndexer();
 
             StringWriter writer = extractor.readFile(new File(fileLocation));
             screenings = extractor.transform(writer);
             cinemaNormalizer.normalize(screenings);
             dateNormalizer.normalize(screenings);
+            // add to the search index
+            for (Screening screening: screenings) {
+                indexer.indexFilm(screening);
+            }
+
 
         }
         catch(Exception e) {
