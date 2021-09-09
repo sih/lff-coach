@@ -1,12 +1,11 @@
 package eu.waldonia.lffcoach.processing;
 
+import static org.junit.Assert.assertNotNull;
+
 import eu.waldonia.lffcoach.model.Screening;
+import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.List;
-
-import static org.junit.Assert.assertNotNull;
 
 /**
  * @author sih
@@ -30,8 +29,6 @@ public class LFFProcessorTest {
             assertNotNull(s.getFilm());
             assertNotNull(s.getVenueDate());
             assertNotNull(s.getVenueTime());
-            assertNotNull(s.getIsoDate());
-            assertNotNull(s.getSynopsis());
         }
 
     }
