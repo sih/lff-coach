@@ -20,8 +20,8 @@ public class PDFExtractor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(PDFExtractor.class);
     private static final String[] CINEMAS = {"BFI","CURZON","SOUTHBANK","ODEON","INSTITUTE"};
-private static final String DATE_LINE = "^(SUNDAY|MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SATURDAY)\\s[0-9]{1,2}\\s(OCTOBER)\\s?$";
-    private static final String FILM_LINE = "^[0-9]{2}:[0-9]{2}\\s[A-Z0-9]+((\\s[A-Z0-9]+)*)?$";
+    private static final String DATE_LINE = "^(SUNDAY|MONDAY|TUESDAY|WEDNESDAY|THURSDAY|FRIDAY|SATURDAY)\\s[0-9]{1,2}\\s(OCTOBER)\\s?$";
+    private static final String FILM_LINE = "^[0-9]{2}:[0-9]{2}\\s[A-Z0-9’]+((\\s[A-Z0-9’]+)*)?$";
 
 
     private static final String END_STRING = "This film will be screened in 3D";
@@ -36,6 +36,7 @@ private static final String DATE_LINE = "^(SUNDAY|MONDAY|TUESDAY|WEDNESDAY|THURS
 
         return sw;
     }
+
 
     List<Screening> transform(StringWriter writer) {
         List<Screening> screenings = new ArrayList<Screening>();
