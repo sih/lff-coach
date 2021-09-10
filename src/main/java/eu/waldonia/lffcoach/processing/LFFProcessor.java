@@ -16,7 +16,7 @@ public class LFFProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(LFFProcessor.class);
     // static final String PDF_LISTING_FILE_LOCATION = "./src/main/resources/lff-2016.pdf";
-//    static final String PDF_LISTING_FILE_LOCATION = "./src/main/resources/lff-2017.pdf";
+    // static final String PDF_LISTING_FILE_LOCATION = "./src/main/resources/lff-2017.pdf";
     static final String PDF_LISTING_FILE_LOCATION = "./src/main/resources/lff-2021.pdf";
 
 
@@ -41,7 +41,5 @@ public class LFFProcessor {
         for (String film: films) {
             LOGGER.info(film);
         }
-
-
     }
 }
