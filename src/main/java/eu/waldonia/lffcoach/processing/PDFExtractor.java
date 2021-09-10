@@ -52,7 +52,7 @@ public class PDFExtractor {
 
             Scanner lines = new Scanner(writer.toString());
             while (lines.hasNext() && !ended) {
-                String line = lines.nextLine();
+                String line = lines.nextLine().trim();
                 LOGGER.debug(line);
                 if (line.matches(DATE_LINE)) {
                     date = line;
