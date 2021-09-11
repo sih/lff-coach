@@ -5,7 +5,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>eu.waldonia</groupId>
   <artifactId>lff-coach</artifactId>
-  <version>2.1.0</version>
+  <version>2.1.1</version>
   <properties>
     <java.version>11</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
