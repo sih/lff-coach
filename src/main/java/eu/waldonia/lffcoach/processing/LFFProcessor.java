@@ -6,8 +6,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.util.List;
 import java.util.Properties;
-import java.util.Set;
-import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,9 +51,13 @@ class LFFProcessor {
 
     LFFProcessor processor = new LFFProcessor();
     List<Screening> screenings = processor.process();
-    Set<String> films = screenings.stream().map(Screening::getFilm).collect(Collectors.toSet());
-    for (String film : films) {
-      LOGGER.info(film);
+    //    Set<String> films =
+    // screenings.stream().map(Screening::getFilm).collect(Collectors.toSet());
+    //    for (String film : films) {
+    //      LOGGER.info(film);
+    //    }
+    for (Screening screening : screenings) {
+      LOGGER.info(screening.toString());
     }
   }
 }

@@ -1,6 +1,7 @@
 package eu.waldonia.lffcoach.processing;
 
 import eu.waldonia.lffcoach.model.Screening;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.StringWriter;
@@ -53,45 +54,62 @@ public class PDFPipeline {
   List<Screening> transform(StringWriter writer) {
     List<Screening> screenings = new ArrayList<Screening>();
 
-    if (writer != null) {
-      String date = null;
-      String cinema = null;
-      String film = null;
-      String time = null;
-      boolean ended = false;
-      Screening screening = null;
+    String date = null;
+    String cinema = null;
+    String film = null;
+    String time = null;
+    boolean ended = false;
+    Screening screening = null;
 
-      Scanner lines = new Scanner(writer.toString());
-      while (lines.hasNext() && !ended) {
-        String line = lines.nextLine().trim();
-        log.debug(line);
-        if (line.matches(dateRegex)) {
-          date = line;
-          log.debug(date);
-        } else if (isCinemaLine(line)) {
-          cinema = line;
-          log.debug(cinema);
-        } else if (line.matches(filmRegex)) {
-          if (screening != null) {
-            screenings.add(screening);
-          }
-          int firstSpace = line.indexOf(' ');
-          time = line.substring(0, firstSpace).trim();
-          film = line.substring(firstSpace).trim();
-          // set up  the fixed lines
-          screening = new Screening();
-          screening.setCinema(cinema);
-          screening.setFilm(film);
-          screening.setVenueDate(date);
-          screening.setVenueTime(time);
+    Scanner lines = new Scanner(writer.toString());
+    while (lines.hasNext() && !ended) {
+      String line = lines.nextLine().trim();
+      log.debug(line);
+      if (line.matches(dateRegex)) {
+        date = line;
+        log.debug(date);
+      } else if (isCinemaLine(line)) {
+        cinema = line;
+        log.debug(cinema);
+      } else if (line.matches(filmRegex)) {
+        if (screening != null) {
+          screenings.add(screening);
         }
-        // end of useful info
-        else if (line.equals(endProcessingString)) {
-          ended = true;
-        }
+        int firstSpace = line.indexOf(' ');
+        time = line.substring(0, firstSpace).trim();
+        film = line.substring(firstSpace).trim();
+        // set up  the fixed lines
+        screening = new Screening();
+        screening.setCinema(cinema);
+        screening.setFilm(film);
+        screening.setVenueDate(date);
+        screening.setVenueTime(time);
+      }
+      // end of useful info
+      else if (line.equals(endProcessingString)) {
+        ended = true;
       }
     }
     return screenings;
+  }
+
+  public static void main(String[] args) {
+    PDDocument doc = null;
+    try {
+      doc = PDDocument.load(new File("./src/test/resources/lff-brochure-2021.pdf"));
+      PDFTextStripper stripper = new PDFTextStripper();
+      stripper.setStartPage(1);
+      stripper.setEndPage(20);
+      StringWriter sw = new StringWriter();
+      stripper.writeText(doc, sw);
+
+      Scanner s = new Scanner(sw.toString());
+      while (s.hasNext()) {
+        log.info(s.nextLine());
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
   private boolean isCinemaLine(String line) {
