@@ -7,15 +7,19 @@
   <artifactId>lff-coach</artifactId>
   <version>2.1.1</version>
   <properties>
-    <java.version>11</java.version>
+    <java.version>19</java.version>
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <maven-compiler-plugin.version>3.8.1</maven-compiler-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <pdfbox.version>2.0.23</pdfbox.version>
-    <lombok.version>1.18.18</lombok.version>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <lombok.version>1.18.24</lombok.version>
+    <commons-collections4.version>4.4</commons-collections4.version>
+    <junit-jupiter.version>5.6.3</junit-jupiter.version>
     <log4j.version>2.6.2</log4j.version>
     <junit.version>4.12</junit.version>
+    <assertj.version>3.23.1</assertj.version>
   </properties>
   <dependencies>
     <dependency>
@@ -43,11 +47,23 @@
       <artifactId>log4j-slf4j-impl</artifactId>
       <version>${log4j.version}</version>
     </dependency>
+    <!-- Tests -->
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>${junit.version}</version>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-api</artifactId>
+      <version>${junit-jupiter.version}</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>org.junit.jupiter</groupId>
+      <artifactId>junit-jupiter-engine</artifactId>
+      <version>${junit-jupiter.version}</version>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>assertj-core</artifactId>
+      <groupId>org.assertj</groupId>
+      <version>${assertj.version}</version>
     </dependency>
   </dependencies>
   <build>
@@ -56,8 +72,8 @@
         <artifactId>maven-compiler-plugin</artifactId>
         <version>${maven-compiler-plugin.version}</version>
         <configuration>
-          <source>11</source>
-          <target>11</target>
+          <source>19</source>
+          <target>19</target>
         </configuration>
       </plugin>
     </plugins>
